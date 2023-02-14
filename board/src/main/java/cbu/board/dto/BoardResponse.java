@@ -10,8 +10,9 @@ import lombok.Getter;
 public class BoardResponse {
 
     private Long id;
-    private String name;
+    private String title;
     private String content;
     private String date;
+    private String update_check;
 
 }

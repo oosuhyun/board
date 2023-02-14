@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class BoardMapper {
     public Board mapToEntity(BoardRequest dto){
         return Board.builder()
-                .name(dto.getName())
+                .title(dto.getTitle())
                 .content(dto.getContent())
                 .build();
     }
@@ -17,9 +17,10 @@ public class BoardMapper {
     public BoardResponse mapToDTO(Board entity) {
         return BoardResponse.builder()
                 .id(entity.getId())
-                .name(entity.getName())
+                .title(entity.getTitle())
                 .content(entity.getContent())
                 .date(entity.getDate())
+                .update_check(entity.getUpdate_check())
                 .build();
     }
 

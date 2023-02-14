@@ -17,24 +17,27 @@ public class Board {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String title;
     private String content;
     private String date;
+    private String update_check;
 
 
     @Builder
-    public Board(Long id, String name, String content, String date) {
+    public Board(Long id, String title, String content, String date, String update_check) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.content = content;
         this.date = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.update_check = "X";
     }
 
-    public void update(String content) {
+    public void update(String title, String content) {
+        this.title = title;
         this.content = content;
-        this.date = LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-
+//        this.date = LocalDateTime.now()
+//                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.update_check = "O";
     }
 }

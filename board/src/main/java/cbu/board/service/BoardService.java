@@ -8,6 +8,7 @@ import cbu.board.entity.BoardRepository;
 import cbu.board.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
@@ -35,15 +36,15 @@ public class BoardService {
 
 
     //목록 조회 기능
-    public List<BoardResponse> findAllOld(){
+    public List<BoardResponse> findAllASC(){
         return boardRepository.findAll(Sort.by(Sort.Direction.ASC,"date"))
                 .stream()
                 .map(boardMapper::mapToDTO)
                 .collect(Collectors.toList());
     }
 
-    //목록 조회 기능(최신순)
-    public List<BoardResponse> findAllRecent(){
+    //목록 조회 기능(오래된순)
+    public List<BoardResponse> findAllDESC(){
         return boardRepository.findAll(Sort.by(Sort.Direction.DESC,"date"))
                 .stream()
                 .map(boardMapper::mapToDTO)
@@ -59,6 +60,7 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
+
     //댓글 삭제
     public void deleteById(Long id) {
         boardRepository.deleteById(id);
@@ -69,6 +71,6 @@ public class BoardService {
     public void update(Long id , UpdateBoardRequest dto){
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("댓글 수정 X"));
-        board.update(dto.getContent());
+        board.update(dto.getTitle(), dto.getContent());
     }
 }

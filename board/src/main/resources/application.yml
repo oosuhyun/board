@@ -8,3 +8,5 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  jwt:
+    secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
